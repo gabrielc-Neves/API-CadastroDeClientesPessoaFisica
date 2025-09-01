@@ -19,6 +19,10 @@ public class ClienteRequestDTO {
     @NotNull(message = "A data de nascimento é obrigatória")
     private LocalDate dataNascimento;
 
+    @NotBlank(message = "A senha é obrigatória")
+    @Email(message = "Senha inválida")
+    private String senha;
+
     // Getters e Setters
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
@@ -31,5 +35,8 @@ public class ClienteRequestDTO {
 
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
+
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 }
 

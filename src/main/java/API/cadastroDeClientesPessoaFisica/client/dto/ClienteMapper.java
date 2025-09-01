@@ -12,7 +12,8 @@ public class ClienteMapper {
                 cliente.getEmail(),
                 cliente.getCpf(),
                 cliente.getDataNascimento(),
-                cliente.getIdade()
+                cliente.getIdade(),
+                cliente.getSenha()
         );
     }
 
@@ -21,7 +22,8 @@ public class ClienteMapper {
                 dto.getNome(),
                 dto.getEmail(),
                 dto.getCpf(),
-                dto.getDataNascimento()
+                dto.getDataNascimento(),
+                dto.getSenha()
         );
     }
 }

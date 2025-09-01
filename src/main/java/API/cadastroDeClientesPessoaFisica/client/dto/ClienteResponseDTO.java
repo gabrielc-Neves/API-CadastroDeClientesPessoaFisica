@@ -10,14 +10,16 @@ public class ClienteResponseDTO {
     private String cpf;
     private LocalDate dataNascimento;
     private int idade;
+    private String senha;
 
-    public ClienteResponseDTO(Long id, String nome, String email, String cpf, LocalDate dataNascimento, int idade) {
+    public ClienteResponseDTO(Long id, String nome, String email, String cpf, LocalDate dataNascimento, int idade, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.idade = idade;
+        this.senha = senha;
     }
 
     // Getters
@@ -27,4 +29,5 @@ public class ClienteResponseDTO {
     public String getCpf() { return cpf; }
     public LocalDate getDataNascimento() { return dataNascimento; }
     public int getIdade() { return idade; }
+    public String getSenha(){return senha;}
 }

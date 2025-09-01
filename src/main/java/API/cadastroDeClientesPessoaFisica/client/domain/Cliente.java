@@ -24,14 +24,18 @@ public class Cliente {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
+    @Column(nullable = false)
+    private String senha; 
+
     // Construtores
     public Cliente() {}
 
-    public Cliente(String nome, String email, String cpf, LocalDate dataNascimento) {
+    public Cliente(String nome, String email, String cpf, LocalDate dataNascimento, String senha) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.senha = senha;
     }
 
     // Getter idade calculada
@@ -56,8 +60,7 @@ public class Cliente {
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    public String getSenha() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSenha'");
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 }
+

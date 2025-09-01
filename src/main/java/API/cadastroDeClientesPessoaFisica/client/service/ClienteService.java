@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Criar novo cliente
     public ClienteResponseDTO criar(ClienteRequestDTO dto) {
@@ -29,7 +34,9 @@ public class ClienteService {
             throw new IllegalArgumentException("Email já cadastrado.");
         }
 
+        
         Cliente cliente = ClienteMapper.toEntity(dto);
+        cliente.setSenha(passwordEncoder.encode(dto.getSenha()));
         Cliente salvo = clienteRepository.save(cliente);
         return ClienteMapper.toResponse(salvo);
     }
@@ -44,6 +51,7 @@ public class ClienteService {
         cliente.setEmail(dto.getEmail());
         cliente.setCpf(dto.getCpf());
         cliente.setDataNascimento(dto.getDataNascimento());
+        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
 
         Cliente atualizado = clienteRepository.save(cliente);
         return ClienteMapper.toResponse(atualizado);
