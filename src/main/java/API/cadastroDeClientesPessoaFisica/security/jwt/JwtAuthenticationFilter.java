@@ -1,4 +1,4 @@
-package API.cadastroDeClientesPessoaFisica.security;
+package API.cadastroDeClientesPessoaFisica.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

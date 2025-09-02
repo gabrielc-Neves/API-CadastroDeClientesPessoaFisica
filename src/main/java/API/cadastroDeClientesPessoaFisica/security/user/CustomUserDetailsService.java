@@ -1,4 +1,4 @@
-package API.cadastroDeClientesPessoaFisica.security;
+package API.cadastroDeClientesPessoaFisica.security.user;
 
 
 import org.springframework.security.core.userdetails.UserDetails;

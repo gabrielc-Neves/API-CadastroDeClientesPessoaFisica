@@ -1,4 +1,4 @@
-package API.cadastroDeClientesPessoaFisica.security;
+package API.cadastroDeClientesPessoaFisica.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

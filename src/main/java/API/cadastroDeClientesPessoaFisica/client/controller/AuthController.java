@@ -1,4 +1,4 @@
-package API.cadastroDeClientesPessoaFisica.security;
+package API.cadastroDeClientesPessoaFisica.client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,6 +6,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
+import API.cadastroDeClientesPessoaFisica.security.jwt.JwtService;
 
 @RestController
 @RequestMapping("/api/auth")
