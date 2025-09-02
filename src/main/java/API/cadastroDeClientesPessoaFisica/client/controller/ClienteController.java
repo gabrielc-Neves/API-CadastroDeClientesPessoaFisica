@@ -3,6 +3,8 @@ package API.cadastroDeClientesPessoaFisica.client.controller;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteRequestDTO;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteResponseDTO;
 import API.cadastroDeClientesPessoaFisica.client.service.ClienteService;
+
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +51,7 @@ public class ClienteController {
 
     // Listar clientes paginados
     @GetMapping
-    public ResponseEntity<Page<ClienteResponseDTO>> listarTodos(Pageable pageable) {
+    public ResponseEntity<Page<ClienteResponseDTO>> listarTodos(@ParameterObject Pageable pageable) {
         Page<ClienteResponseDTO> clientes = clienteService.listarTodos(pageable);
         return ResponseEntity.ok(clientes);
     }

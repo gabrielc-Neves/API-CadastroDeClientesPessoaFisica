@@ -1,9 +1,9 @@
 package API.cadastroDeClientesPessoaFisica.client.service;
 
 
-import API.cadastroDeClientesPessoaFisica.client.domain.Cliente;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteRequestDTO;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteResponseDTO;
+import API.cadastroDeClientesPessoaFisica.client.model.Cliente;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteMapper;
 import API.cadastroDeClientesPessoaFisica.client.repo.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

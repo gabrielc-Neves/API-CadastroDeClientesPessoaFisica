@@ -3,7 +3,7 @@ package API.cadastroDeClientesPessoaFisica.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import API.cadastroDeClientesPessoaFisica.client.domain.Cliente;
+import API.cadastroDeClientesPessoaFisica.client.model.Cliente;
 
 import java.util.Collection;
 import java.util.Collections;

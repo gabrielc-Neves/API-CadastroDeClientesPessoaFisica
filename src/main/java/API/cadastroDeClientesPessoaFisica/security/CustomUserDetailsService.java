@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import API.cadastroDeClientesPessoaFisica.client.domain.Cliente;
+import API.cadastroDeClientesPessoaFisica.client.model.Cliente;
 import API.cadastroDeClientesPessoaFisica.client.repo.ClienteRepository;
 
 @Service

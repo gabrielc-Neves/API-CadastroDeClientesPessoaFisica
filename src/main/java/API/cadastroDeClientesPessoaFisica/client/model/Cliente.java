@@ -1,4 +1,4 @@
-package API.cadastroDeClientesPessoaFisica.client.domain;
+package API.cadastroDeClientesPessoaFisica.client.model;
 
 
 import jakarta.persistence.*;

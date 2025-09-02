@@ -1,7 +1,7 @@
 package API.cadastroDeClientesPessoaFisica.client.dto;
 
 
-import API.cadastroDeClientesPessoaFisica.client.domain.Cliente;
+import API.cadastroDeClientesPessoaFisica.client.model.Cliente;
 
 public class ClienteMapper {
 
