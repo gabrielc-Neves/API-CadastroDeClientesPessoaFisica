@@ -23,18 +23,19 @@ cadastroDeClientesPessoaFisica/
 │   │   ├── java/
 │   │   │   └── API/
 │   │   │       └── cadastroDeClientesPessoaFisica/
+│   │   │           ├── CadastroDeClientesPessoaFisicaApplication.java   # Classe principal
 │   │   │           ├── client/
 │   │   │           │   ├── controller/      # Controllers REST (ClienteController, AuthController)
 │   │   │           │   ├── dto/             # DTOs e mapeadores (ClienteRequestDTO, ClienteResponseDTO, ClienteMapper)
 │   │   │           │   ├── model/           # Entidade Cliente
 │   │   │           │   ├── repo/            # Repositório JPA (ClienteRepository)
 │   │   │           │   └── service/         # Regras de negócio (ClienteService)
+│   │   │           ├── config/
+│   │   │           │   └── SwaggerConfig.java # Configuração Swagger/OpenAPI
 │   │   │           ├── security/
 │   │   │           │   ├── config/          # Configuração de segurança (SecurityConfig)
 │   │   │           │   ├── jwt/             # JWT Service e Filter
 │   │   │           │   └── user/            # UserDetails e UserDetailsService customizados
-│   │   │           ├── config/              # Configuração Swagger/OpenAPI
-│   │   │           └── CadastroDeClientesPessoaFisicaApplication.java # Classe principal
 │   │   └── resources/
 │   │       ├── application.properties       # Configurações do Spring Boot e banco de dados
 │   │       ├── static/                      # Arquivos estáticos (se necessário)
@@ -43,14 +44,11 @@ cadastroDeClientesPessoaFisica/
 │       └── java/
 │           └── API/
 │               └── cadastroDeClientesPessoaFisica/
-│                   ├── controller/          # Testes unitários do ClienteService
-│                   └── CadastroDeClientesPessoaFisicaApplicationTests.java
-├── pom.xml                                  # Dependências e configuração Maven
-├── mvnw, mvnw.cmd, .mvn/                    # Maven Wrapper
-├── .gitignore, .gitattributes               # Configurações Git
-└── README.md                                # Este arquivo
+│                   ├── CadastroDeClientesPessoaFisicaApplicationTests.java
+│                   ├── controller/          # Testes integrados dos controllers
+│                   ├── service/             # Testes unitários do ClienteService
+│                   └── comportamento/       # Testes de comportamento (fluxo completo)
 ```
-
 ## Endpoints Principais
 
 - `POST /api/clientes` — Cria um novo cliente
@@ -76,9 +74,27 @@ cadastroDeClientesPessoaFisica/
 
 ## Testes
 
-- Testes unitários do serviço de cliente em [`src/test/java/API/cadastroDeClientesPessoaFisica/controller/ClienteControllerTest.java`](src/test/java/API/cadastroDeClientesPessoaFisica/controller/ClienteControllerTest.java).
-- Teste de contexto Spring Boot em [`src/test/java/API/cadastroDeClientesPessoaFisica/CadastroDeClientesPessoaFisicaApplicationTests.java`](src/test/java/API/cadastroDeClientesPessoaFisica/CadastroDeClientesPessoaFisicaApplicationTests.java).
+A cobertura de testes está organizada em três tipos principais:
 
+- **Testes Unitários**  
+  Localizados em `src/test/java/API/cadastroDeClientesPessoaFisica/service/ClienteServiceTest.java`.  
+  Testam as regras de negócio da classe `ClienteService` isoladamente, utilizando mocks para dependências.
+
+- **Testes Integrados**  
+  Localizados em `src/test/java/API/cadastroDeClientesPessoaFisica/controller/ClienteControllerIT.java`.  
+  Validam o funcionamento dos endpoints dos controllers, simulando requisições HTTP reais com o contexto Spring Boot.
+
+- **Testes de Comportamento**  
+  Localizados em `src/test/java/API/cadastroDeClientesPessoaFisica/comportamento/FluxoCadastroAutenticacaoIT.java`.  
+  Simulam o fluxo completo do usuário, como cadastro e autenticação, garantindo que os principais cenários funcionem conforme esperado.
+
+Além disso, há o teste de contexto da aplicação em  
+`src/test/java/API/cadastroDeClientesPessoaFisica/CadastroDeClientesPessoaFisicaApplicationTests.java`.
+
+Para rodar todos os testes, utilize:
+```
+./mvnw test
+```
 ## Documentação Swagger
 
 - Acesse `/swagger-ui.html` para explorar e testar os endpoints da API.
@@ -108,3 +124,77 @@ cadastroDeClientesPessoaFisica/
 - O Swagger facilita o teste dos endpoints.
 
 ---
+
+# Processo Criativo e Decisões de Desenvolvimento
+
+## Introdução
+
+Durante o desenvolvimento deste projeto de cadastro de clientes pessoa física, procurei seguir boas práticas do ecossistema Java/Spring, sempre buscando aprender e aplicar conceitos novos. Neste projeto priorizei clareza, organização e pesquisa constante para superar os desafios.
+
+---
+
+## 1. Levantamento dos Requisitos
+
+Comecei entendendo o objetivo principal: criar uma API REST para cadastro, edição, listagem e exclusão de clientes pessoa física, com autenticação JWT e documentação Swagger.  
+
+---
+
+## 2. Estruturação do Projeto
+
+Optei por separar o projeto em camadas (controller, service, repository, dto, model) para facilitar manutenção e testes.  
+Usei o Spring Initializr para gerar a estrutura básica e adicionei dependências como Spring Web, Spring Data JPA, H2, Spring Security e Swagger.
+
+---
+
+## 3. Modelagem dos Dados
+
+Criei a entidade `Cliente` com os campos essenciais (nome, email, cpf, data de nascimento, senha).  
+Implementei DTOs para entrada e saída, garantindo que os dados sensíveis (como senha) fossem tratados corretamente.
+
+---
+
+## 4. Implementação dos Endpoints
+
+Implementei os endpoints REST seguindo o padrão CRUD.  
+Utilizei Bean Validation para garantir que os dados enviados fossem válidos, pesquisando exemplos de uso das anotações como `@NotBlank`, `@Email`, `@Pattern` e `@NotNull`.
+
+---
+
+## 5. Autenticação JWT
+  
+Tive dificuldades ao implementar o JWT no swagger mas com algumas tentativas, erro e feedback consegui configurá-lo.
+
+---
+
+## 6. Documentação Swagger
+
+Adicionei o Swagger para facilitar testes e documentação dos endpoints.  
+Fui ajustando as anotações para descrever os retornos e possíveis erros, aprendendo sobre o padrão OpenAPI.
+
+---
+
+## 7. Testes
+
+Implementei testes unitários e integrados para garantir o funcionamento dos serviços e controllers.  
+No início, tive dificuldades com o Mockito, especialmente para mockar métodos estáticos, mas consegui resolver pesquisando exemplos e ajustando o escopo dos mocks.
+
+---
+
+## 8. Resolução de Problemas
+
+Durante o desenvolvimento, enfrentei problemas como erro 403 (Forbidden) e 400 (Bad Request).  
+Aprendi a analisar os logs, revisar a configuração de segurança e ajustar os DTOs para garantir compatibilidade com o JSON enviado.
+
+---
+
+## 9. Aprendizados
+
+- A importância de separar responsabilidades em camadas.
+- Como documentar APIs com Swagger.
+
+---
+
+## 10. Considerações Finais
+
+Procurei ser organizado, documentar o código e registrar as decisões tomadas.  
+Busquei aprender com cada desafio e entregar uma solução funcional, segura e bem documentada.
