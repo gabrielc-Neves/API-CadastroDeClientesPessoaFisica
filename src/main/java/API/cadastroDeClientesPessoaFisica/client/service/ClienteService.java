@@ -6,14 +6,14 @@ import API.cadastroDeClientesPessoaFisica.client.dto.ClienteResponseDTO;
 import API.cadastroDeClientesPessoaFisica.client.model.Cliente;
 import API.cadastroDeClientesPessoaFisica.client.dto.ClienteMapper;
 import API.cadastroDeClientesPessoaFisica.client.repo.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
@@ -51,7 +51,7 @@ public class ClienteService {
         cliente.setEmail(dto.getEmail());
         cliente.setCpf(dto.getCpf());
         cliente.setDataNascimento(dto.getDataNascimento());
-        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
+        cliente.setSenha(passwordEncoder.encode(dto.getSenha()));
 
         Cliente atualizado = clienteRepository.save(cliente);
         return ClienteMapper.toResponse(atualizado);
@@ -73,8 +73,8 @@ public class ClienteService {
     }
 
     // Listar todos (paginado)
-    public Page<ClienteResponseDTO> listarTodos(Pageable pageable) {
-        return clienteRepository.findAll(pageable)
+    public Page<ClienteResponseDTO> listarTodos(int page, int size) {
+        return clienteRepository.findAll(PageRequest.of(page, size))
                 .map(ClienteMapper::toResponse);
     }
 
